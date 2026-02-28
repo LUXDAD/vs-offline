@@ -21,7 +21,12 @@ Select Visual Studio Edition:
 Enter number:
 "@
 
-
+$BootstrapperUrl = switch ($edition) {
+    "1" { "https://aka.ms/vs/18/stable/vs_enterprise.exe" }
+    "2" { "https://aka.ms/vs/18/stable/vs_professional.exe" }
+    "3" { "https://aka.ms/vs/18/stable/vs_community.exe" }
+    default { Write-Host "Invalid selection"; exit }
+}
 
 $Bootstrapper = Join-Path $PSScriptRoot "vs_bootstrapper.exe"
 
