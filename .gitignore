@@ -1,0 +1,35 @@
+# Visual Studio cache
+.vs/
+
+# Build output
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+*.pdb
+*.dll
+*.exe
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.cache
+*.db
+
+# Logs and temp
+*.log
+*.tmp
+
+# NuGet
+packages/
+*.nupkg
+
+# VS Code
+.vscode/
+
+# Windows junk
+Thumbs.db
+Desktop.ini
