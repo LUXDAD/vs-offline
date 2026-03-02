@@ -1,5 +1,5 @@
 #!/usr/bin/env pwsh
-# Visual Studio 2017–2026 Offline Layout Downloader (Download-only, modern systems)
+# Visual Studio 2017–2026 Offline Layout Downloader
 
 param(
     [string]$RootPath = "$PSScriptRoot/VS_Offline"
