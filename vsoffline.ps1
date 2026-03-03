@@ -1,5 +1,5 @@
 #!/usr/bin/env pwsh
-# Visual Studio 2017–2026 Offline Layout Downloader
+# Visual Studio 2017–2026 Offline Layout Downloader (Download-only, modern systems)
 
 param(
     [string]$RootPath = "$PSScriptRoot/VS_Offline"
@@ -67,11 +67,22 @@ function Select-Language {
     $languages = @(
         "en-US","de-DE","fr-FR","es-ES","ja-JP","zh-CN","ru-RU"
     )
-    Write-Host "`nAvailable languages:"
-    $languages | ForEach-Object { Write-Host "- $_" }
-    $lang = Read-Host "Enter language code (default en-US)"
-    if ([string]::IsNullOrWhiteSpace($lang)) { $lang = "en-US" }
-    return $lang
+
+    Write-Host "`nSelect Language:"
+    for ($i=0; $i -lt $languages.Count; $i++) {
+        Write-Host "$($i+1) = $($languages[$i])"
+    }
+
+    $sel = Read-Host "Enter number (default 1)"
+    if ([string]::IsNullOrWhiteSpace($sel)) { return $languages[0] }
+
+    $index = [int]$sel - 1
+    if ($index -lt 0 -or $index -ge $languages.Count) {
+        Write-Host "Invalid selection. Using en-US."
+        return "en-US"
+    }
+
+    return $languages[$index]
 }
 
 # --- Version / Edition Maps (2017–2026) ---------------------------------
@@ -123,11 +134,6 @@ if (-not $versions.ContainsKey($verSel)) {
 $version = $versions[$verSel]
 $vid = $version.Id
 
-if (-not $bootstrapMap.ContainsKey($vid)) {
-    Write-Host "No bootstrapper map defined for $($version.Name)."
-    exit
-}
-
 $bm = $bootstrapMap[$vid]
 
 Write-Host "`nSelect Edition:"
@@ -161,16 +167,16 @@ $layoutPath = Join-Path $versionDir "Layout_$($edition.Name)_$lang"
 Ensure-Dir -Path $layoutPath
 
 Write-Host "`nCreating/Updating offline layout at: $layoutPath"
-$argList = @("--layout", $layoutPath, "--lang", $lang)
 
-$proc = Start-Process -FilePath $bootstrapperPath -ArgumentList $argList -PassThru -Wait
+$argList = @("--layout", $layoutPath, "--lang", $lang, "--quiet")
+
+Start-Process -FilePath $bootstrapperPath -ArgumentList $argList -Wait
 
 Write-Host "`nLayout process finished."
 
-# VS 2017–2022: vs_setup.exe; VS 2026 may use setup.exe – check both
 $setupCandidates = @(
-    Join-Path $layoutPath "vs_setup.exe",
-    Join-Path $layoutPath "setup.exe"
+    (Join-Path $layoutPath "vs_setup.exe"),
+    (Join-Path $layoutPath "setup.exe")
 )
 
 $installerPath = $setupCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
