@@ -1,15 +1,16 @@
 # Visual Studio - Offline 
 ### Versions - 2017, 2019, 2022, 2026
 ### Editions - Enterprise, Professional, Community
+#### Full Versions - select all features and workloads in installer
 
 Download from official Microsoft repositories and install or deploy in local machines without internet connection.
 
-1. Download file "vsoffline.ps1" in folder "C:\vs-offline"
+1. Download file "vso.ps1" into folder "C:\vs-offline"
 2. Run the script with the following command:
 ```powershell
-pwsh -File "C:\vs-offline\vsoffline.ps1"
+pwsh -File "C:\vs-offline\vso.ps1"
 ```
-3. select version 
+3. select version, efition, language 
 4. wait until the download is complete (80-85GB for 2026 Enterprise), 
 	the files will be saved in "C:\vs-offline\Layout"
 5. copy "C:\vs-offline\Layout" to local machine 
