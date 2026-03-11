@@ -6,9 +6,15 @@
 Download from official Microsoft repositories and install or deploy in local machines without internet connection.
 
 1. Download file "vso.ps1" into folder "C:\vs-offline"
-2. Run the script with the following command:
+2. open Powershell as admin and run the script with the following command:
+	a) if you have Windows Powershell installed, run:
 ```powershell
-pwsh -File "C:\vs-offline\vso.ps1"
+powershell -File "C:\vs-offline\vso.ps1"
+```
+
+	a) if you have Windows Powershell installed, run:
+```powershell
+powershell -File "C:\vs-offline\vso.ps1"
 ```
 3. select version, efition, language 
 4. wait until the download is complete (80-85GB for 2026 Enterprise), 
