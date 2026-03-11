@@ -4,17 +4,18 @@
 #### Full Versions - select all features and workloads in installer
 
 Download from official Microsoft repositories and install or deploy in local machines without internet connection.
+(Download speed depends on your internet connection, but it is recommended to use a stable and fast connection for downloading the large files.)
 
 1. Download file "vso.ps1" into folder "C:\vs-offline"
 2. open Powershell as admin and run the script with the following command:
-	a) if you have Windows Powershell installed, run:
+a) if you have Windows Powershell installed, run:
 ```powershell
 powershell -File "C:\vs-offline\vso.ps1"
 ```
 
-	a) if you have Windows Powershell installed, run:
+b) if you have Powershell 7+ installed, run:
 ```powershell
-powershell -File "C:\vs-offline\vso.ps1"
+pwsh -File "C:\vs-offline\vso.ps1"
 ```
 3. select version, efition, language 
 4. wait until the download is complete (80-85GB for 2026 Enterprise), 
